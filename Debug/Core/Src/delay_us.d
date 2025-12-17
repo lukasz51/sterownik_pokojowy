@@ -1,8 +1,4 @@
-Core/Src/init.o: ../Core/Src/init.c ../Core/Inc/main.h \
- ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal.h \
- ../Core/Inc/stm32l1xx_hal_conf.h \
- ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc.h \
- ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_def.h \
+Core/Src/delay_us.o: ../Core/Src/delay_us.c ../Core/Inc/delay_us.h \
  ../Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l1xx.h \
  ../Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l151xb.h \
  ../Drivers/CMSIS/Include/core_cm3.h \
@@ -11,6 +7,10 @@ Core/Src/init.o: ../Core/Src/init.c ../Core/Inc/main.h \
  ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Include/mpu_armv7.h \
  ../Drivers/CMSIS/Device/ST/STM32L1xx/Include/system_stm32l1xx.h \
+ ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal.h \
+ ../Core/Inc/stm32l1xx_hal_conf.h \
+ ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc.h \
+ ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_def.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc_ex.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_gpio.h \
@@ -28,17 +28,8 @@ Core/Src/init.o: ../Core/Src/init.c ../Core/Inc/main.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_tim.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_tim_ex.h \
  ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_uart.h \
- ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_exti.h \
- ../Core/Inc/adc.h ../Core/Inc/main.h ../Core/Inc/dma.h ../Core/Inc/spi.h \
- ../Core/Inc/tim.h ../Core/Inc/usart.h ../Core/Inc/gpio.h \
- ../Core/Inc/init.h ../Core/Inc/adc.h ../Core/Inc/dma.h ../Core/Inc/tim.h \
- ../Core/Inc/usart.h ../Core/Inc/gpio.h ../Core/Inc/nrf24l01p.h \
- ../Core/Inc/spi.h ../Core/Inc/delay_us.h
-../Core/Inc/main.h:
-../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal.h:
-../Core/Inc/stm32l1xx_hal_conf.h:
-../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc.h:
-../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_def.h:
+ ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_exti.h
+../Core/Inc/delay_us.h:
 ../Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l1xx.h:
 ../Drivers/CMSIS/Device/ST/STM32L1xx/Include/stm32l151xb.h:
 ../Drivers/CMSIS/Include/core_cm3.h:
@@ -47,6 +38,10 @@ Core/Src/init.o: ../Core/Src/init.c ../Core/Inc/main.h \
 ../Drivers/CMSIS/Include/cmsis_gcc.h:
 ../Drivers/CMSIS/Include/mpu_armv7.h:
 ../Drivers/CMSIS/Device/ST/STM32L1xx/Include/system_stm32l1xx.h:
+../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal.h:
+../Core/Inc/stm32l1xx_hal_conf.h:
+../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc.h:
+../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_def.h:
 ../Drivers/STM32L1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_rcc_ex.h:
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_gpio.h:
@@ -65,19 +60,3 @@ Core/Src/init.o: ../Core/Src/init.c ../Core/Inc/main.h \
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_tim_ex.h:
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_uart.h:
 ../Drivers/STM32L1xx_HAL_Driver/Inc/stm32l1xx_hal_exti.h:
-../Core/Inc/adc.h:
-../Core/Inc/main.h:
-../Core/Inc/dma.h:
-../Core/Inc/spi.h:
-../Core/Inc/tim.h:
-../Core/Inc/usart.h:
-../Core/Inc/gpio.h:
-../Core/Inc/init.h:
-../Core/Inc/adc.h:
-../Core/Inc/dma.h:
-../Core/Inc/tim.h:
-../Core/Inc/usart.h:
-../Core/Inc/gpio.h:
-../Core/Inc/nrf24l01p.h:
-../Core/Inc/spi.h:
-../Core/Inc/delay_us.h:

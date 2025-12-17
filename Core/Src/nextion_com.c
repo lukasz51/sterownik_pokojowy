@@ -92,11 +92,11 @@ void SendDataNextion(void)
     int len = 0;
 
     // temperatura -> TEXT
-    len += append_nextion_txt("nTemp", temperature, dma_buf[0], len);
+    len += append_nextion_txt("tTemp2", temperature, dma_buf[0], len);
 
     // bateria 0–3
     uint8_t bat_lvl = battery_level_from_mv(voltage_mv);
-    len += append_nextion_val("nBat", bat_lvl, dma_buf[0], len);
+    len += append_nextion_val("t_v", bat_lvl, dma_buf[0], len);
 
     // statusy
     len += append_nextion_val("nCharge", bat_char,   dma_buf[0], len);

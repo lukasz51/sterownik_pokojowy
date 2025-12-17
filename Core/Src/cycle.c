@@ -11,11 +11,12 @@
 #include <stdint.h>
 #include <string.h> // memset
 #include <math.h>   // opcjonalnie, jeśli używasz math w innych plikach
+#include "nrf24l01p.h"
 
-
+uint8_t tx_data[NRF24L01P_PAYLOAD_LENGTH] = {25, 1, 2, 3, 4, 5, 6, 7};
 uint32_t adc[3];
 
-
+extern volatile uint8_t rf_flag;
 // ---------- Konfiguracja ----------
 #ifndef FILTER_SIZE
 #define FILTER_SIZE   8     // długość filtra (pierścieniowy bufor)
@@ -70,5 +71,21 @@ void process_adc_values(void)
 void cycle(void)
 {
 	process_adc_values();
+	temperature = temperature - 40;
+	tx_data[0] = temperature/10;
+	tx_data[1] = temperature% 10;
+	if (rf_flag == 1)
+	{
+
+		nrf24l01p_switch_rx_to_tx();
+		HAL_Delay(100);
+		nrf24l01p_tx_transmit(tx_data);
+		HAL_Delay(50);
+		nrf24l01p_switch_tx_to_rx();
+		rf_flag = 0;
+	}
+
+
+
 
 }

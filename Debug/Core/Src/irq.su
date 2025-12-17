@@ -1,2 +1,3 @@
-../Core/Src/irq.c:25:6:HAL_TIM_PeriodElapsedCallback	16	static
-../Core/Src/irq.c:43:6:HAL_UARTEx_RxEventCallback	16	static
+../Core/Src/irq.c:27:6:HAL_TIM_PeriodElapsedCallback	16	static
+../Core/Src/irq.c:41:6:HAL_GPIO_EXTI_Callback	16	static
+../Core/Src/irq.c:51:6:HAL_UARTEx_RxEventCallback	16	static

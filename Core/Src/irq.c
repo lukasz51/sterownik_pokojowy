@@ -6,6 +6,9 @@
 #include "usart.h"
 #include "nextion_com.h"
 #include <string.h>
+#include "nrf24l01p.h"
+
+
 
 
 #define RX_BUF_SIZE 20
@@ -13,11 +16,10 @@
 uint8_t uart_rx_byte;      // DMA odbiór po 1 bajcie
 uint8_t rx_buf[RX_BUF_SIZE];
 volatile uint16_t rx_len = 0;
+volatile uint8_t rf_flag;
 
 
-extern volatile  uint8_t enable_zone1;
-extern volatile uint8_t enable_cwu;
-
+uint8_t rx_data[NRF24L01P_PAYLOAD_LENGTH];
 
 
 
@@ -36,7 +38,13 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 }
 
 
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+	if(GPIO_Pin == NRF24L01P_IRQ_PIN_NUMBER)
+		nrf24l01p_rx_receive(rx_data);
+	    rf_flag = 1;
 
+}
 
 
 
