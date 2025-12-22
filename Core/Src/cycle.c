@@ -57,7 +57,7 @@ void process_adc_values(void)
 {
     // --- temperatura z adc[0] ---
     uint16_t filtered_t = adc_filter(0, (uint16_t)adc[0]);
-    temperature = NTC_ADC2Temperature(filtered_t);
+    //temperature = NTC_ADC2Temperature(filtered_t);
 
     // --- napięcie z adc[1] ---
     uint16_t filtered_v = adc_filter(1, (uint16_t)adc[1]);
