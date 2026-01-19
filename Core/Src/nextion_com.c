@@ -6,6 +6,7 @@
 #include "usart.h"
 #include "gpio.h"
 
+#include "uart_dma.h"
 #include <stdio.h>
 #include <string.h>
 
@@ -89,21 +90,33 @@ static int append_nextion_val(const char *name,
 }
 void SendDataNextion(void)
 {
-    int len = 0;
+    uint16_t len = 0;
+    uint8_t buf[128];   // lokalny bufor pakietu (dobierz rozmiar!)
 
-    // temperatura -> TEXT
-    len += append_nextion_txt("tTemp2", temperature, dma_buf[0], len);
+    /* temperatura -> TEXT */
+    len += append_nextion_txt(
+                "tTemp2",
+                temperature,
+                buf,
+                len
+           );
 
-    // bateria 0–3
+    /* bateria 0–3 */
     uint8_t bat_lvl = battery_level_from_mv(voltage_mv);
-    len += append_nextion_val("t_v", bat_lvl, dma_buf[0], len);
+    len += append_nextion_val(
+                "t_v",
+                bat_lvl,
+                buf,
+                len
+           );
 
-    // statusy
-    len += append_nextion_val("nCharge", bat_char,   dma_buf[0], len);
-    len += append_nextion_val("nFenix",  fenix_stat, dma_buf[0], len);
-    len += append_nextion_val("nLqi",     lqi,        dma_buf[0], len);
-    len += append_nextion_val("nCO",      co_stat,   dma_buf[0], len);
-    len += append_nextion_val("nCWU",     cwu_stat,  dma_buf[0], len);
+    /* statusy */
+    len += append_nextion_val("nCharge", bat_char,  buf, len);
+    len += append_nextion_val("nFenix",  fenix_stat,buf, len);
+    len += append_nextion_val("nLqi",    lqi,       buf, len);
+    len += append_nextion_val("nCO",     co_stat,  buf, len);
+    len += append_nextion_val("nCWU",    cwu_stat, buf, len);
 
-    HAL_UART_Transmit_DMA(&huart3, dma_buf[0], len);
+    /* wrzucenie do TX ring buffer + DMA */
+    uart_tx_write(buf, len);
 }

@@ -3,7 +3,7 @@
 #ifndef INC_NEXTION_COM_H_
 #define INC_NEXTION_COM_H_
 
-extern int temperature[4];
+extern volatile int temperature;
 
 void SendDataNextion(void);
 

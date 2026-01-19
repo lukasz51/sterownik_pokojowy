@@ -16,6 +16,7 @@
 "./Core/Src/system_stm32l1xx.o"
 "./Core/Src/thermistor.o"
 "./Core/Src/tim.o"
+"./Core/Src/uart_dma.o"
 "./Core/Src/usart.o"
 "./Core/Startup/startup_stm32l151c8tx.o"
 "./Drivers/STM32L1xx_HAL_Driver/Src/stm32l1xx_hal.o"

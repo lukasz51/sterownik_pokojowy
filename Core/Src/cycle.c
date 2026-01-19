@@ -12,7 +12,9 @@
 #include <string.h> // memset
 #include <math.h>   // opcjonalnie, jeśli używasz math w innych plikach
 #include "nrf24l01p.h"
+#include "nextion_com.h"
 
+extern uint8_t uart_tx_flag;
 uint8_t tx_data[NRF24L01P_PAYLOAD_LENGTH] = {25, 1, 2, 3, 4, 5, 6, 7};
 uint32_t adc[3];
 
@@ -70,6 +72,12 @@ void process_adc_values(void)
 }
 void cycle(void)
 {
+
+	if(uart_tx_flag == 1)
+	{
+		SendDataNextion();
+		uart_tx_flag = 0;
+	}
 	process_adc_values();
 	temperature = temperature - 40;
 	tx_data[0] = temperature/10;

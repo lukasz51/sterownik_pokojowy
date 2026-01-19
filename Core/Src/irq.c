@@ -9,7 +9,7 @@
 #include "nrf24l01p.h"
 
 
-
+uint8_t uart_tx_flag = 0;
 
 #define RX_BUF_SIZE 20
 
@@ -30,7 +30,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	if (htim->Instance == TIM11)
 		{
 
-		SendDataNextion();
+
+		uart_tx_flag = 1;
 
 
 
