@@ -9,11 +9,21 @@
 #include "gpio.h"
 #include "thermistor.h"
 #include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include <string.h> // memset
 #include <math.h>   // opcjonalnie, jeśli używasz math w innych plikach
 #include "nrf24l01p.h"
 #include "nextion_com.h"
+#include "uart_cmd.h"
 
+
+extern uint8_t bat_char;
+extern uint8_t fenix_stat;
+extern uint8_t lqi;
+extern uint8_t co_stat;
+extern uint8_t cwu_stat;
+uint8_t t_set = 21;
 extern uint8_t uart_tx_flag;
 uint8_t tx_data[NRF24L01P_PAYLOAD_LENGTH] = {25, 1, 2, 3, 4, 5, 6, 7};
 uint32_t adc[3];
@@ -36,6 +46,39 @@ uint32_t voltage_mv;    // napięcie w mV po przeliczeniu i korekcji ×2
 #define ADC_MAX     4095
 #define ADC_REF_MV  3300   // zmień jeśli masz inną referencję
 #define DIV_FACTOR  2      // mnożnik korekcyjny dzielnika
+
+static void process_uart(void)
+{
+    static uint8_t cmd[32];
+    uint8_t len = uart_cmd_pop(cmd, sizeof(cmd) - 1);
+    if (!len)
+        return;
+
+    cmd[len] = 0;   // string terminator
+
+    /* =====================================================
+     * t_setXXCWP  (XX = 15..25)
+     * ===================================================== */
+    if (!strncmp((char *)cmd, "t_set", 5))
+    {
+        char *val_ptr = (char *)&cmd[5];
+
+        /* musi kończyć się na CWP */
+        char *suffix = strstr(val_ptr, "CWP");
+        if (!suffix)
+            return;
+
+        *suffix = 0;   // odcinamy "CWP"
+
+        int val = atoi(val_ptr);
+        if (val >= 15 && val <= 28)
+        {
+
+        	t_set = val;
+        }
+        return;
+    }
+}
 
 // ---- Filtr średniej kroczącej ----
 static uint16_t adc_filter(uint8_t ch, uint16_t new_sample)
@@ -73,16 +116,17 @@ void process_adc_values(void)
 void cycle(void)
 {
 
+	process_uart();
 	if(uart_tx_flag == 1)
 	{
 		SendDataNextion();
 		uart_tx_flag = 0;
 	}
 	process_adc_values();
-	temperature = temperature - 40;
+	temperature = temperature;
 	tx_data[0] = temperature/10;
 	tx_data[1] = temperature% 10;
-	tx_data[2] = 24;
+	tx_data[2] = t_set;
 	if (rf_flag == 1)
 	{
 
@@ -93,8 +137,6 @@ void cycle(void)
 		nrf24l01p_switch_tx_to_rx();
 		rf_flag = 0;
 	}
-
-
 
 
 }

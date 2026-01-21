@@ -1,3 +1,4 @@
-../Core/Src/cycle.c:41:17:adc_filter	16	static
-../Core/Src/cycle.c:58:6:process_adc_values	16	static
-../Core/Src/cycle.c:73:6:cycle	8	static
+../Core/Src/cycle.c:50:13:process_uart	24	static
+../Core/Src/cycle.c:84:17:adc_filter	16	static
+../Core/Src/cycle.c:101:6:process_adc_values	16	static
+../Core/Src/cycle.c:116:6:cycle	8	static

@@ -1,4 +1,5 @@
-../Core/Src/nextion_com.c:25:16:battery_level_from_mv	16	static
-../Core/Src/nextion_com.c:32:12:append_nextion_txt	32	static
-../Core/Src/nextion_com.c:68:12:append_nextion_val	32	static
-../Core/Src/nextion_com.c:91:6:SendDataNextion	144	static
+../Core/Src/nextion_com.c:28:16:battery_level_from_mv	16	static
+../Core/Src/nextion_com.c:37:12:build_nextion_msg	64	static
+../Core/Src/nextion_com.c:93:12:append_nextion_txt_value	32	static
+../Core/Src/nextion_com.c:118:12:append_nextion_val	32	static
+../Core/Src/nextion_com.c:142:6:SendDataNextion	152	static

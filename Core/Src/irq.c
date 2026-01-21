@@ -7,6 +7,7 @@
 #include "nextion_com.h"
 #include <string.h>
 #include "nrf24l01p.h"
+#include "uart_cmd.h"
 
 
 uint8_t uart_tx_flag = 0;
@@ -29,12 +30,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
 	if (htim->Instance == TIM11)
 		{
-
-
 		uart_tx_flag = 1;
-
-
-
 		}
 }
 
@@ -48,47 +44,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 
-
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 {
-	/*
-    if(huart->Instance == USART1)
+    if (huart->Instance == USART3)
     {
-        rx_len = Size;  // liczba odebranych bajtów
-
-        // Sprawdzenie, czy na końcu jest "cwp"
-        if(rx_len >= 3 &&
-           rx_buf[rx_len-3] == 'C' &&
-           rx_buf[rx_len-2] == 'W' &&
-           rx_buf[rx_len-1] == 'P')
-        {
-            // zakończ string przed "cwp"
-            rx_buf[rx_len-3] = '\0';
-
-            // Obsługa komend
-            if(strcmp((char*)rx_buf, "10") == 0)
-            {
-                enable_zone1 = 0;
-                enable_cwu   = 0;
-            }
-            else if(strcmp((char*)rx_buf, "11") == 0)
-            {
-                enable_zone1 = 1;
-                enable_cwu   = 1;
-            }
-            else
-            {
-                // obsługa innych komend
-            }
-
-            // Kasowanie bufora po obsłudze
-            memset(rx_buf, 0, RX_BUF_SIZE);
-        }
-
-        // Restart DMA do kolejnego odbioru
+        uart_cmd_push(rx_buf, Size);
         HAL_UARTEx_ReceiveToIdle_DMA(&huart3, rx_buf, RX_BUF_SIZE);
     }
-    */
 }
-
-

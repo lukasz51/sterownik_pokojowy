@@ -113,7 +113,6 @@ int main(void)
   while (1)
   {
 	  cycle();
-	  HAL_Delay(100);
 
     /* USER CODE END WHILE */
 
