@@ -26,7 +26,7 @@ extern uint8_t cwu_stat;
 uint8_t t_set = 21;
 extern uint8_t uart_tx_flag;
 uint8_t tx_data[NRF24L01P_PAYLOAD_LENGTH] = {25, 1, 2, 3, 4, 5, 6, 7};
-uint32_t adc[3];
+uint16_t adc[3];
 
 extern volatile uint8_t rf_flag;
 // ---------- Konfiguracja ----------

@@ -12,6 +12,7 @@
 /* ===== ZMIENNE ZEWNĘTRZNE ===== */
 extern int temperature;          // temperatura w ×10 (np. 234 = 23.4°C)
 extern uint32_t voltage_mv;
+extern uint16_t adc[3];
 
 /* ===== STATUSY ===== */
 uint8_t bat_char;
@@ -153,7 +154,17 @@ void SendDataNextion(void)
     uint8_t bat_lvl = battery_level_from_mv(voltage_mv);
     len += append_nextion_txt_value("t_v", bat_lvl, buf, len);
 
+
     /* statusy – bez zmian */
+    if(adc[2] > 2000)
+    {
+    	bat_char = 1;
+    }
+    else
+    {
+    	bat_char = 0;
+	}
+
     len += append_nextion_val("nCharge", bat_char,   buf, len);
     len += append_nextion_val("nFenix",  fenix_stat, buf, len);
     len += append_nextion_val("nLqi",    lqi,        buf, len);

@@ -9,7 +9,6 @@
 #include "nrf24l01p.h"
 #include "uart_cmd.h"
 
-
 uint8_t uart_tx_flag = 0;
 
 #define RX_BUF_SIZE 20
@@ -52,3 +51,6 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
         HAL_UARTEx_ReceiveToIdle_DMA(&huart3, rx_buf, RX_BUF_SIZE);
     }
 }
+
+
+
